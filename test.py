@@ -3,16 +3,17 @@
 from ircreactor.envelope import RFC1459Message
 import yaml
 
-print('Running tests:')
-
-# load test data
+# SPLIT Tests
+print('Running split tests')
 data = yaml.safe_load(open('split.yaml').read())
+
+failed_tests = 0
+passed_tests = 0
 
 for test in data['tests']:
     input = test['input']
     atoms = test['atoms']
-
-    print('Testing:', input)
+    out = ' * Testing: [{}]\n'.format(input)
 
     m = RFC1459Message.from_message(input)
     failed = False
@@ -20,23 +21,34 @@ for test in data['tests']:
     # test atoms
     if 'tags' in atoms:
         if m.tags != atoms['tags']:
-            print('  *** Decoded tags failed, was [{}]'.format(m.tags.lower()))
+            out += '   Decoding tags failed, was [{}]\n'.format(m.tags.lower())
             failed = True
 
     if 'verb' in atoms:
         if m.verb.lower() != atoms['verb']:
-            print('  *** Decoded verb failed, was [{}]'.format(m.verb.lower()))
+            out += '   Decoding verb failed, was [{}]\n'.format(m.verb.lower())
             failed = True
 
     if 'source' in atoms:
         if m.source != atoms['source']:
-            print('  *** Decoded source failed, was [{}]'.format(m.source))
+            out += '   Decoding source failed, was [{}]\n'.format(m.source)
             failed = True
 
     if 'params' in atoms:
-        if m.params != atoms['params']:
-            print('  *** Decoded params failed, was', m.params)
+        atom_params = list(atoms['params'])
 
-    # final message
+        for param in m.params:
+            if param != atom_params.pop(0):
+                out += '   Decoding params failed\n'
+                failed = True
+                break
+
+    # fail message
     if failed:
-        print(' FAIL\n')
+        print(out)
+        failed_tests += 1
+    else:
+        passed_tests += 1
+
+print(' * Passed Tests:', passed_tests)
+print(' * Failed Tests:', failed_tests)
