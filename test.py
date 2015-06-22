@@ -25,16 +25,25 @@ for test in data['tests']:
         if m.tags != atoms['tags']:
             out += '   Decoding tags failed, was [{}]\n'.format(m.tags)
             failed = True
+    elif m.tags != {}:
+        out += '   Decoding tags failed, was [{}]\n'.format(m.tags)
+        failed = True
 
     if 'verb' in atoms:
         if m.verb.lower() != atoms['verb']:
             out += '   Decoding verb failed, was [{}]\n'.format(m.verb.lower())
             failed = True
+    elif m.verb.lower() != '':
+        out += '   Decoding verb failed, was [{}]\n'.format(m.verb.lower())
+        failed = True
 
     if 'source' in atoms:
         if m.source != atoms['source']:
             out += '   Decoding source failed, was [{}]\n'.format(m.source)
             failed = True
+    elif m.source != None:
+        out += '   Decoding source failed, was [{}]\n'.format(m.source)
+        failed = True
 
     if 'params' in atoms:
         atom_params = list(atoms['params'])
@@ -44,6 +53,9 @@ for test in data['tests']:
                 out += '   Decoding params failed\n'
                 failed = True
                 break
+    elif len(m.params):
+        out += '   Decoding params failed\n'
+        failed = True
 
     # fail message
     if failed:
@@ -77,16 +89,25 @@ for test in data['tests']:
         if nm.nick != atoms['nick']:
             out += '   Decoding nick failed, was [{}]\n'.format(nm.nick)
             failed = True
+    elif nm.nick != '':
+        out += '   Decoding nick failed, was [{}]\n'.format(nm.nick)
+        failed = True
 
     if 'user' in atoms:
         if nm.user != atoms['user']:
             out += '   Decoding user failed, was [{}]\n'.format(nm.user)
             failed = True
+    elif nm.nick != '':
+        out += '   Decoding user failed, was [{}]\n'.format(nm.user)
+        failed = True
 
     if 'host' in atoms:
         if nm.host != atoms['host']:
             out += '   Decoding host failed, was [{}]\n'.format(nm.host)
             failed = True
+    elif nm.host != '':
+        out += '   Decoding host failed, was [{}]\n'.format(nm.host)
+        failed = True
 
     # fail message
     if failed:
