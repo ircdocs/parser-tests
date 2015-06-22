@@ -132,6 +132,21 @@ tests:
       params:
         - "cd"
 
+  # different forms of last param
+  - input: ":src JOIN #chan"
+    atoms:
+      source: "src"
+      verb: "JOIN"
+      params:
+        - "#chan"
+
+  - input: ":src JOIN :#chan"
+    atoms:
+      source: "src"
+      verb: "JOIN"
+      params:
+        - "#chan"
+
   # broken messages from unreal
   - input: ":gravel.mozilla.org 432  #momo :Erroneous Nickname: Illegal characters"
     atoms:
