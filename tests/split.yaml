@@ -169,6 +169,25 @@ tests:
         - "bar"
         - "baz"
 
+  # with weird control codes in the source
+  - input: ":coolguy!ag@net\x035w\x03ork.admin PRIVMSG foo bar baz"
+    atoms:
+      source: "coolguy!ag@net\x035w\x03ork.admin"
+      verb: "PRIVMSG"
+      params:
+        - "foo"
+        - "bar"
+        - "baz"
+
+  - input: ":coolguy!~ag@n\x02et\x0305w\x0fork.admin PRIVMSG foo bar baz"
+    atoms:
+      source: "coolguy!~ag@n\x02et\x0305w\x0fork.admin"
+      verb: "PRIVMSG"
+      params:
+        - "foo"
+        - "bar"
+        - "baz"
+
   # broken messages from unreal
   - input: ":gravel.mozilla.org 432  #momo :Erroneous Nickname: Illegal characters"
     atoms:
