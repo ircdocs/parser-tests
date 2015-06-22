@@ -2,6 +2,7 @@
 # Testing split.yaml with ircreactor and girc
 from ircreactor.envelope import RFC1459Message
 from girc.utils import NickMask, validate_hostname
+import ircmatch
 import yaml
 
 
@@ -182,6 +183,44 @@ for test in data['tests']:
     if should_be_valid and not is_valid:
         out += '   Hostname failed validation, but should have passed [{}]\n'.format(host)
         failed = True
+
+    # fail message
+    if failed:
+        print(out)
+        failed_tests += 1
+    else:
+        passed_tests += 1
+
+print(' * Passed Tests:', passed_tests)
+print(' * Failed Tests:', failed_tests)
+print()
+
+
+# MASK Tests
+print('Running mask matching tests')
+data = yaml.safe_load(open('tests/mask-match.yaml').read())
+
+failed_tests = 0
+passed_tests = 0
+
+for test in data['tests']:
+    mask = test['mask']
+    matches = test['matches']
+    invalid = test['fails']
+    out = ' * Testing: [{}]\n'.format(mask)
+
+    failed = False
+
+    # test validity
+    for address in matches:
+        if not ircmatch.match(ircmatch.ascii, mask, address):
+            out += '   Address did not match but should have [{}]\n'.format(address)
+            failed = True
+
+    for address in invalid:
+        if ircmatch.match(ircmatch.ascii, mask, address):
+            out += '   Address matched but should not have [{}]\n'.format(address)
+            failed = True
 
     # fail message
     if failed:

@@ -1,0 +1,37 @@
+# IRC parser tests
+# mask matching
+
+tests:
+  # mask is the mask to use
+
+  # matches is a list of strings that should match the mask
+  # fails is a list of strings that should not match the mask
+
+  # simple
+  - mask: "*@127.0.0.1"
+    matches:
+      - "coolguy!ab@127.0.0.1"
+      - "cooldud3!~bc@127.0.0.1"
+    fails:
+      - "coolguy!ab@127.0.0.5"
+      - "cooldud3!~d@124.0.0.1"
+
+  - mask: "cool*@*"
+    matches:
+      - "coolguy!ab@127.0.0.1"
+      - "cooldud3!~bc@127.0.0.1"
+      - "cool132!ab@example.com"
+    fails:
+      - "koolguy!ab@127.0.0.5"
+      - "cooodud3!~d@124.0.0.1"
+
+  - mask: "cool!*@*"
+    matches:
+      - "cool!guyab@127.0.0.1"
+      - "cool!~dudebc@127.0.0.1"
+      - "cool!312ab@example.com"
+    fails:
+      - "coolguy!ab@127.0.0.1"
+      - "cooldud3!~bc@127.0.0.1"
+      - "koolguy!ab@127.0.0.5"
+      - "cooodud3!~d@124.0.0.1"
