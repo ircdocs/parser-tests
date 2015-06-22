@@ -48,3 +48,16 @@ tests:
     atoms:
       nick: "coolguy"
       user: "ag"
+
+  # weird control codes, does happen
+  - source: "coolguy!ag@net\x035w\x03ork.admin"
+    atoms:
+      nick: "coolguy"
+      user: "ag"
+      host: "net\x035w\x03ork.admin"
+
+  - source: "coolguy!~ag@n\x02et\x0305w\x0fork.admin"
+    atoms:
+      nick: "coolguy"
+      user: "~ag"
+      host: "n\x02et\x0305w\x0fork.admin"
