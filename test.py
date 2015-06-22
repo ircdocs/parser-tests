@@ -7,7 +7,7 @@ import yaml
 
 # SPLIT Tests
 print('Running split tests')
-data = yaml.safe_load(open('tests/split.yaml').read())
+data = yaml.safe_load(open('tests/msg-split.yaml').read())
 
 failed_tests = 0
 passed_tests = 0
@@ -71,7 +71,7 @@ print()
 
 # JOIN Tests
 print('Running join tests')
-data = yaml.safe_load(open('tests/join.yaml').read())
+data = yaml.safe_load(open('tests/msg-join.yaml').read())
 
 failed_tests = 0
 passed_tests = 0
@@ -109,7 +109,7 @@ print()
 
 # NICKMASK Tests
 print('Running nickmask tests')
-data = yaml.safe_load(open('tests/nickmask.yaml').read())
+data = yaml.safe_load(open('tests/mask-split.yaml').read())
 
 failed_tests = 0
 passed_tests = 0

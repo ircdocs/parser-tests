@@ -1,5 +1,5 @@
 # IRC parser tests
-# splitting server strings into usable atoms
+# splitting messages into usable atoms
 
 # most of the tests in here originate from grawity's test vectors
 #   https://github.com/grawity/code/tree/master/lib/tests
