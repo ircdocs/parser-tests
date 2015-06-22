@@ -2,7 +2,9 @@
 # splitting server strings into usable atoms
 
 # most of the tests in here originate from grawity's test vectors
-# https://github.com/grawity/code/tree/master/lib/tests
+#   https://github.com/grawity/code/tree/master/lib/tests
+# some also come from Mozilla's test vectors
+#   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
 
 tests:
   # input is the string coming directly from the server to parse
@@ -82,6 +84,14 @@ tests:
         - "baz"
         - "  asdf quux "
 
+  - input: ":coolguy PRIVMSG bar :lol :) "
+    atoms:
+      source: "coolguy"
+      verb: "PRIVMSG"
+      params:
+        - "bar"
+        - "lol :) "
+
   - input: ":coolguy foo bar baz :"
     atoms:
       source: "coolguy"
@@ -121,3 +131,33 @@ tests:
       verb: "ab"
       params:
         - "cd"
+
+  # broken messages from unreal
+  - input: ":gravel.mozilla.org 432  #momo :Erroneous Nickname: Illegal characters"
+    atoms:
+      source: "gravel.mozilla.org"
+      verb: "432"
+      params:
+        - ""
+        - "#momo"
+        - "Erroneous Nickname: Illegal characters"
+
+  - input: ":gravel.mozilla.org MODE #tckk +n "
+    atoms:
+      source: "gravel.mozilla.org"
+      verb: "MODE"
+      params:
+        - "#tckk"
+        - "+n"
+        - ""
+
+  - input: ":services.esper.net MODE #foo-bar +o foobar  "
+    atoms:
+      source: "services.esper.net"
+      verb: "MODE"
+      params:
+        - "#foo-bar"
+        - "+o"
+        - "foobar"
+        - ""
+        - ""

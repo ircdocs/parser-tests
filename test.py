@@ -30,7 +30,7 @@ for test in data['tests']:
         failed = True
 
     if 'verb' in atoms:
-        if m.verb.lower() != atoms['verb']:
+        if m.verb.lower() != atoms['verb'].lower():
             out += '   Decoding verb failed, was [{}]\n'.format(m.verb.lower())
             failed = True
     elif m.verb.lower() != '':
