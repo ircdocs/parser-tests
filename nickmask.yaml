@@ -43,3 +43,8 @@ tests:
     atoms:
       nick: "coolguy"
       user: "ag"
+
+  - source: "coolguy!ag"
+    atoms:
+      nick: "coolguy"
+      user: "ag"
