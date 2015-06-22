@@ -1,6 +1,8 @@
 # IRC parser tests
 # mask matching
 
+# whatever belongs to me is public domain
+
 tests:
   # mask is the mask to use
 

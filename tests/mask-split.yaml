@@ -1,6 +1,8 @@
 # IRC parser tests
 # splitting nickmasks into atoms
 
+# whatever belongs to me is public domain
+
 tests:
   # source is the mask directly
 
