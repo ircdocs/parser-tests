@@ -1,0 +1,24 @@
+# IRC parser tests
+# splitting nickmasks into atoms
+
+tests:
+  # source is the mask directly
+
+  # the atoms dict has the keys:
+  #   * nick: nick string
+  #   * user: user string
+  #   * host: host string
+  # if a key does not exist, assume it is an empty string
+
+  # simple
+  - source: "coolguy!ag@127.0.0.1"
+    atoms:
+      nick: "coolguy"
+      user: "ag"
+      host: "127.0.0.1"
+
+  - source: "coolguy!~ag@localhost"
+    atoms:
+      nick: "coolguy"
+      user: "~ag"
+      host: "localhost"
