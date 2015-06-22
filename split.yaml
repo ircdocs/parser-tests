@@ -100,6 +100,16 @@ tests:
         - "baz"
         - "  "
 
+  # with tags
+  - input: "@a=b;c=32;k;rt=ql7 foo"
+    atoms:
+      verb: "foo"
+      tags:
+        "a": "b"
+        "c": "32"
+        "k": true
+        "rt": "ql7"
+
   # with tags and source
   - input: "@c;h=;a=b :quux ab cd"
     atoms:
