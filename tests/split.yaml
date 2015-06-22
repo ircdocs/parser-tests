@@ -160,6 +160,15 @@ tests:
       params:
         - ""
 
+  # tab is not considered <SPACE>
+  - input: ":cool\tguy foo bar baz"
+    atoms:
+      source: "cool\tguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+
   # broken messages from unreal
   - input: ":gravel.mozilla.org 432  #momo :Erroneous Nickname: Illegal characters"
     atoms:
