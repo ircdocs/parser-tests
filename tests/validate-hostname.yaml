@@ -1,0 +1,34 @@
+# IRC parser tests
+# validating hostnames
+
+tests:
+  # host is the hostname string
+
+  # valid is whether the name should be considered valid
+
+  # valid hostnames
+  - host: "irc.example.com"
+    valid: true
+
+  - host: "i.coolguy.net"
+    valid: true
+
+  - host: "irc-srv.net.uk"
+    valid: true
+
+  # valid hostnames with digits
+  - host: "gsf.ds342.co.uk"
+    valid: true
+
+  - host: "324.net.uk"
+    valid: true
+
+  # invalid hostnames
+  - host: "-lol-.net.uk"
+    valid: false
+
+  - host: "-lol.net.uk"
+    valid: false
+
+  - host: "_irc._sctp.lol.net.uk"
+    valid: false

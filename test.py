@@ -118,3 +118,39 @@ for test in data['tests']:
 
 print(' * Passed Tests:', passed_tests)
 print(' * Failed Tests:', failed_tests)
+print()
+
+
+# HOSTNAME Tests
+print('Running hostname tests')
+data = yaml.safe_load(open('tests/validate-hostname.yaml').read())
+
+failed_tests = 0
+passed_tests = 0
+
+for test in data['tests']:
+    host = test['host']
+    should_be_valid = test['valid']
+    out = ' * Testing: [{}]\n'.format(host)
+
+    is_valid = validate_hostname(host)
+    failed = False
+
+    # test validity
+    if is_valid and not should_be_valid:
+        out += '   Hostname validated successfully, but should have failed [{}]\n'.format(host)
+        failed = True
+
+    if should_be_valid and not is_valid:
+        out += '   Hostname failed validation, but should have passed [{}]\n'.format(host)
+        failed = True
+
+    # fail message
+    if failed:
+        print(out)
+        failed_tests += 1
+    else:
+        passed_tests += 1
+
+print(' * Passed Tests:', passed_tests)
+print(' * Failed Tests:', failed_tests)
