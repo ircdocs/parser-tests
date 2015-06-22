@@ -1,0 +1,152 @@
+# IRC parser tests
+# joining atoms into sendable messages
+
+# most of the tests in here originate from grawity's test vectors
+#   https://github.com/grawity/code/tree/master/lib/tests
+# some also come from Mozilla's test vectors
+#   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
+
+tests:
+  # the atoms dict has the keys:
+  #   * tags: tags dict
+  #       tags with no equals sign have a value of true in this file
+  #       tags with no value after = sign have a value of empty string
+  #   * source: source string, without single leading colon
+  #   * verb: verb string
+  #   * params: params split up as a list
+  # if the params key does not exist, assume it is empty
+  # if any other keys do no exist, assume they are null
+  # a key that is null does not exist or is not specified with the
+  #   given input string
+
+  # matches is a list of messages that match
+
+  # simple
+  - atoms:
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf"
+    matches:
+      - "foo bar baz asdf"
+      - "foo bar baz :asdf"
+
+  # with source
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf"
+    matches:
+      - ":coolguy foo bar baz asdf"
+      - ":coolguy foo bar baz :asdf"
+
+  # with trailing param
+  - atoms:
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf quux"
+    matches:
+      - "foo bar baz :asdf quux"
+
+  - atoms:
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ""
+    matches:
+      - "foo bar baz "
+      - "foo bar baz :"
+
+  - atoms:
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ":asdf"
+    matches:
+      - "foo bar baz ::asdf"
+
+  # with source and trailing param
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf quux"
+    matches:
+      - ":coolguy foo bar baz :asdf quux"
+
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "  asdf quux "
+    matches:
+      - ":coolguy foo bar baz :  asdf quux "
+
+  - atoms:
+      source: "coolguy"
+      verb: "PRIVMSG"
+      params:
+        - "bar"
+        - "lol :) "
+    matches:
+      - ":coolguy PRIVMSG bar :lol :) "
+
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ""
+    matches:
+      - ":coolguy foo bar baz "
+      - ":coolguy foo bar baz :"
+
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "  "
+    matches:
+      - ":coolguy foo bar baz :  "
+
+  # with and without last param
+  - atoms:
+      source: "src"
+      verb: "AWAY"
+    matches:
+      - ":src AWAY"
+
+  - atoms:
+      source: "src"
+      verb: "AWAY"
+      params:
+        - ""
+    matches:
+      - ":src AWAY "
+      - ":src AWAY :"
+
+  # tab is not considered <SPACE>
+  - atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "b\tar"
+        - "baz"
+    matches:
+      - ":coolguy foo b\tar baz"
+      - ":coolguy foo b\tar :baz"

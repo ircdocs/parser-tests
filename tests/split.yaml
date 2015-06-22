@@ -48,7 +48,7 @@ tests:
         - "bar"
         - "baz"
         - "asdf quux"
-  
+
   - input: "foo bar baz :"
     atoms:
       verb: "foo"
@@ -56,7 +56,7 @@ tests:
         - "bar"
         - "baz"
         - ""
-  
+
   - input: "foo bar baz ::asdf"
     atoms:
       verb: "foo"

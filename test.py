@@ -69,6 +69,44 @@ print(' * Failed Tests:', failed_tests)
 print()
 
 
+# JOIN Tests
+print('Running join tests')
+data = yaml.safe_load(open('tests/join.yaml').read())
+
+failed_tests = 0
+passed_tests = 0
+
+for test in data['tests']:
+    atoms = test['atoms']
+    matches = test['matches']
+    out = ' * Testing: [{}]\n'.format(matches[0])
+
+    failed = False
+    m = RFC1459Message.from_data(atoms['verb'], **{
+        'params': atoms.get('params'),
+        'source': atoms.get('source'),
+        'tags': atoms.get('tags', {}),
+    })
+    msg = m.to_message()
+
+    # test atoms
+    if msg not in matches:
+        out += '   Joining message failed, got [{}]\n'.format(msg)
+        failed = True
+        break
+
+    # fail message
+    if failed:
+        print(out)
+        failed_tests += 1
+    else:
+        passed_tests += 1
+
+print(' * Passed Tests:', passed_tests)
+print(' * Failed Tests:', failed_tests)
+print()
+
+
 # NICKMASK Tests
 print('Running nickmask tests')
 data = yaml.safe_load(open('tests/nickmask.yaml').read())
