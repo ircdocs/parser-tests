@@ -8,7 +8,9 @@ tests:
   # input is the string coming directly from the server to parse
 
   # the atoms dict has the keys:
-  #   * tags: tags string, without single leading at sign
+  #   * tags: tags dict
+  #       tags with no value have a value of true
+  #       tags with no value after = sign have a value of empty string
   #   * source: source string, without single leading colon
   #   * verb: verb string
   #   * params: params split up as a list
@@ -17,7 +19,7 @@ tests:
   # a key that is null does not exist or is not specified with the
   #   given input string
 
-  # simple join
+  # simple
   - input: "foo bar baz asdf"
     atoms:
       verb: "foo"
@@ -26,7 +28,7 @@ tests:
         - "baz"
         - "asdf"
 
-  # simple join with source
+  # with source
   - input: ":coolguy foo bar baz asdf"
     atoms:
       source: "coolguy"
@@ -36,7 +38,7 @@ tests:
         - "baz"
         - "asdf"
 
-  # simple join with trailing param
+  # with trailing param
   - input: "foo bar baz :asdf quux"
     atoms:
       verb: "foo"
@@ -61,7 +63,7 @@ tests:
         - "baz"
         - ":asdf"
 
-  # simple join with source and trailing param
+  # with source and trailing param
   - input: ":coolguy foo bar baz :asdf quux"
     atoms:
       source: "coolguy"
@@ -70,3 +72,15 @@ tests:
         - "bar"
         - "baz"
         - "asdf quux"
+
+  # with tags and source
+  - input: "@c;h=;a=b :quux ab cd"
+    atoms:
+      tags:
+        "c": true
+        "h": ""
+        "a": "b"
+      source: "quux"
+      verb: "ab"
+      params:
+        - "cd"

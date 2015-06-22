@@ -18,6 +18,11 @@ for test in data['tests']:
     failed = False
 
     # test atoms
+    if 'tags' in atoms:
+        if m.tags != atoms['tags']:
+            print('  *** Decoded tags failed, was [{}]'.format(m.tags.lower()))
+            failed = True
+
     if 'verb' in atoms:
         if m.verb.lower() != atoms['verb']:
             print('  *** Decoded verb failed, was [{}]'.format(m.verb.lower()))
