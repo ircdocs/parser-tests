@@ -16,11 +16,18 @@ tests:
   - host: "irc-srv.net.uk"
     valid: true
 
+  - host: "iRC.CooLguY.NeT"
+    valid: true
+
   # valid hostnames with digits
   - host: "gsf.ds342.co.uk"
     valid: true
 
   - host: "324.net.uk"
+    valid: true
+
+  # valid hostnames with international encoding
+  - host: "xn--bcher-kva.ch"
     valid: true
 
   # invalid hostnames
@@ -31,4 +38,7 @@ tests:
     valid: false
 
   - host: "_irc._sctp.lol.net.uk"
+    valid: false
+
+  - host: "irc.Bücher.ch"
     valid: false
