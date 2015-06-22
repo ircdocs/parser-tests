@@ -1,0 +1,72 @@
+# IRC parser tests
+# splitting, turning server strings into output
+
+# most of the tests in here originate from grawity's test vectors
+# https://github.com/grawity/code/tree/master/lib/tests
+
+tests:
+  # input is the string coming directly from the server to parse
+
+  # the atoms dict has the keys:
+  #   * tags: tags string, without single leading at sign
+  #   * source: source string, without single leading colon
+  #   * command: command string
+  #   * params: params split up as a list
+  # if the params key does not exist, assume it is empty
+  # if any other keys do no exist, assume they are null
+  # a key that is null does not exist or is not specified with the
+  #   given input string
+
+  # simple join
+  - input: "foo bar baz asdf"
+    atoms:
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf"
+
+  # simple join with source
+  - input: ":coolguy foo bar baz asdf"
+    atoms:
+      source: "coolguy"
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf"
+
+  # simple join with trailing param
+  - input: "foo bar baz :asdf quux"
+    atoms:
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf quux"
+  
+  - input: "foo bar baz :"
+    atoms:
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ""
+  
+  - input: "foo bar baz ::asdf"
+    atoms:
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ":asdf"
+
+  # simple join with source and trailing param
+  - input: ":coolguy foo bar baz :asdf quux"
+    atoms:
+      source: "coolguy"
+      command: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "asdf quux"
