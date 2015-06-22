@@ -97,7 +97,7 @@ for test in data['tests']:
         if nm.user != atoms['user']:
             out += '   Decoding user failed, was [{}]\n'.format(nm.user)
             failed = True
-    elif nm.nick != '':
+    elif nm.user != '':
         out += '   Decoding user failed, was [{}]\n'.format(nm.user)
         failed = True
 
