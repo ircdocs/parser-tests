@@ -2,7 +2,7 @@ IRC Parser Tests
 ================
 Tests for IRC parsers.
 
-**Note:** This is nowhere near done or ready for much use at all for anyone but me yet. Feel free to submit PRs.
+**Note:** This is still being written. Feel free to suggest or contribute tests - PRs are welcomed!
 
 
 Testing
@@ -16,4 +16,4 @@ After that, simply run ``python3 test.py``. This will test everything we can tes
 
 License
 -------
-Whatever belongs to me is released into the public domain, do whatever you want with it. Most of these originate from `grawity's tests <https://github.com/grawity/code/tree/master/lib/tests>`_ though, so they may be covered under that license.
+Whatever belongs to me is released into the public domain, do whatever you want with it. Some tests originate from `grawity's tests <https://github.com/grawity/code/tree/master/lib/tests>`_, so they may be covered under that license.
