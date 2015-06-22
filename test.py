@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # Testing split.yaml with ircreactor and girc
+# This file is is released into the public domain,
+#   do whatever you want with it.
 from ircreactor.envelope import RFC1459Message
 from girc.utils import NickMask, validate_hostname
 import ircmatch
