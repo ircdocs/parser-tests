@@ -73,6 +73,33 @@ tests:
         - "baz"
         - "asdf quux"
 
+  - input: ":coolguy foo bar baz :  asdf quux "
+    atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "  asdf quux "
+
+  - input: ":coolguy foo bar baz :"
+    atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - ""
+
+  - input: ":coolguy foo bar baz :  "
+    atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "  "
+
   # with tags and source
   - input: "@c;h=;a=b :quux ab cd"
     atoms:
