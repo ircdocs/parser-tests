@@ -16,4 +16,8 @@ After that, simply run ``python3 test.py``. This will test everything we can tes
 
 License
 -------
-Whatever belongs to me is released into the public domain, do whatever you want with it. Some tests originate from `Mozilla's test vectors <https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js>`_, which are public domain. Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which are MIT licensed, so those tests may be covered under that license.
+Whatever belongs to me is released into the public domain, do whatever you want with it.
+
+Some tests originate from `Mozilla's test vectors <https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js>`_, which are public domain.
+
+Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which are MIT licensed.
