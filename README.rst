@@ -14,10 +14,8 @@ The library `ircmatch <https://github.com/mammon-ircd/ircmatch>`_ is also used a
 After that, simply run ``python3 test.py``. This will test everything we can test, and show the output.
 
 
-License
+Sources
 -------
-Whatever belongs to me is released into the public domain, do whatever you want with it.
-
 Some tests originate from `Mozilla's test vectors <https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js>`_, which are public domain.
 
-Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which are MIT licensed.
+Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which are WTFPL v2 licensed.

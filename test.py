@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
 # Testing split.yaml with ircreactor and girc
-# This file is is released into the public domain,
-#   do whatever you want with it.
+
+# Written in 2015 by Daniel Oaks <daniel@danieloaks.net>
+#
+# To the extent possible under law, the author(s) have dedicated all copyright
+# and related and neighboring rights to this software to the public domain
+# worldwide. This software is distributed without any warranty.
+#
+# You should have received a copy of the CC0 Public Domain Dedication along
+# with this software. If not, see
+# <http://creativecommons.org/publicdomain/zero/1.0/>.
+
 from ircreactor.envelope import RFC1459Message
 from girc.utils import NickMask, validate_hostname
 import ircmatch

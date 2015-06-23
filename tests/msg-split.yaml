@@ -1,8 +1,17 @@
 # IRC parser tests
 # splitting messages into usable atoms
 
-# whatever belongs to me is public domain
-# some of the tests in here originate from grawity's test vectors, which is MIT licensed
+# Written in 2015 by Daniel Oaks <daniel@danieloaks.net>
+#
+# To the extent possible under law, the author(s) have dedicated all copyright
+# and related and neighboring rights to this software to the public domain
+# worldwide. This software is distributed without any warranty.
+#
+# You should have received a copy of the CC0 Public Domain Dedication along
+# with this software. If not, see
+# <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+# some of the tests in here originate from grawity's test vectors, which is WTFPL v2 licensed
 #   https://github.com/grawity/code/tree/master/lib/tests
 # some also come from Mozilla's test vectors, which is public domain
 #   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
