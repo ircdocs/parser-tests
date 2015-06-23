@@ -32,6 +32,10 @@ tests:
   - host: "xn--bcher-kva.ch"
     valid: true
 
+  # # this should only validate after being transformed into punycode as above
+  # - host: "irc.Bücher.ch"
+  #   valid: false
+
   # invalid hostnames
   - host: "-lol-.net.uk"
     valid: false
@@ -40,7 +44,4 @@ tests:
     valid: false
 
   - host: "_irc._sctp.lol.net.uk"
-    valid: false
-
-  - host: "irc.Bücher.ch"
     valid: false
