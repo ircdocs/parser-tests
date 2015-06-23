@@ -7,6 +7,11 @@
 # some also come from Mozilla's test vectors, which is public domain
 #   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
 
+# we follow RFC1459 with regards to multiple ascii spaces splitting atoms:
+#   The prefix, command, and all parameters are
+#   separated by one (or more) ASCII space character(s) (0x20).
+# because doing it as RFC2812 says (strictly as a single ascii space) isn't sane
+
 tests:
   # input is the string coming directly from the server to parse
 
