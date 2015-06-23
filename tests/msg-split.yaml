@@ -193,7 +193,6 @@ tests:
       source: "gravel.mozilla.org"
       verb: "432"
       params:
-        - ""
         - "#momo"
         - "Erroneous Nickname: Illegal characters"
 
@@ -214,5 +213,4 @@ tests:
         - "#foo-bar"
         - "+o"
         - "foobar"
-        - ""
         - ""

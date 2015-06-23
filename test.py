@@ -52,7 +52,7 @@ for test in data['tests']:
         atom_params = list(atoms['params'])
 
         for param in m.params:
-            if param != atom_params.pop(0):
+            if len(atom_params) < 1 or param != atom_params.pop(0):
                 out += '   Decoding params failed\n'
                 failed = True
                 break
