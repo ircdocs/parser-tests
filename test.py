@@ -53,7 +53,7 @@ for test in data['tests']:
 
         for param in m.params:
             if len(atom_params) < 1 or param != atom_params.pop(0):
-                out += '   Decoding params failed\n'
+                out += '   Decoding params failed, was {}\n'.format(m.params)
                 failed = True
                 break
     elif len(m.params):
