@@ -135,6 +135,15 @@ tests:
         "k": true
         "rt": "ql7"
 
+  # with escaped tags
+  - input: "@a=b\\\\and\\nk;c=72\\s45;d=gh\\:764 foo"
+    atoms:
+      verb: "foo"
+      tags:
+        "a": "b\\and\nk"
+        "c": "72 45"
+        "d": "gh;764"
+
   # with tags and source
   - input: "@c;h=;a=b :quux ab cd"
     atoms:
