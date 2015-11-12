@@ -53,7 +53,7 @@ for test in data['tests']:
         if m.source != atoms['source']:
             out += '   Decoding source failed, was [{}]\n'.format(m.source)
             failed = True
-    elif m.source != None:
+    elif m.source is not None:
         out += '   Decoding source failed, was [{}]\n'.format(m.source)
         failed = True
 
