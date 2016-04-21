@@ -7,9 +7,9 @@ Tests for IRC parsers.
 
 Testing
 -------
-The ``test.py`` script uses both the `ircreactor <https://github.com/mammon-ircd/ircreactor>`_ and `girc <https://github.com/DanielOaks/girc>`_ libraries as 'reference' implementations. Neither of these are on PyPi, and must be installed with ``python3 setup.py install`` on both of them.
+The ``test.py`` script uses the `girc <https://github.com/DanielOaks/girc>`_ and `ircmatch <https://github.com/mammon-ircd/ircmatch>`_ libraries as reference implementations.
 
-The library `ircmatch <https://github.com/mammon-ircd/ircmatch>`_ is also used as a reference implementation. This is `on PyPi <https://pypi.python.org/pypi/ircmatch>`_, and can be installed with ``pip3 install ircmatch``.
+To install these libraries, run ``pip3 install --upgrade girc ircmatch``.
 
 After that, simply run ``python3 test.py``. This will test everything we can test, and show the output.
 
