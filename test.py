@@ -11,7 +11,7 @@
 # with this software. If not, see
 # <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-from ircreactor.envelope import RFC1459Message
+from girc.ircreactor.envelope import RFC1459Message
 from girc.utils import NickMask, validate_hostname
 import ircmatch
 import yaml
@@ -224,12 +224,12 @@ for test in data['tests']:
 
     # test validity
     for address in matches:
-        if not ircmatch.match(ircmatch.ascii, mask, address):
+        if not ircmatch.match(1, mask, address):
             out += '   Address did not match but should have [{}]\n'.format(address)
             failed = True
 
     for address in invalid:
-        if ircmatch.match(ircmatch.ascii, mask, address):
+        if ircmatch.match(1, mask, address):
             out += '   Address matched but should not have [{}]\n'.format(address)
             failed = True
 
