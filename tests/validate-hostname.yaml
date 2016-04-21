@@ -53,3 +53,14 @@ tests:
 
   - host: "_irc._sctp.lol.net.uk"
     valid: false
+
+  # technically valid hostnames but not allowed as IRC hostnames (server names or client hostnames)
+  - host: "irc"
+    valid: false
+
+  - host: "com"
+    valid: false
+
+  # empty hostname
+  - host: ""
+    valid: false
