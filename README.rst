@@ -18,4 +18,4 @@ Sources
 -------
 Some tests originate from `Mozilla's test vectors <https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js>`_, which are public domain.
 
-Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which are WTFPL v2 licensed.
+Some tests originate from `grawity's test vectors <https://github.com/grawity/code/tree/master/lib/tests>`_ which were WTFPL v2 licensed when they were retrieved.
