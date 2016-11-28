@@ -20,6 +20,10 @@ After that, simply run `python3 test.py`. This will test everything we can test,
 
 ## Sources
 
+Thanks to these sources for having open tests and/or agreeing to let me include your tests here!
+
 Some tests originate from [Mozilla's test vectors](https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js), which are public domain.
 
 Some tests originate from [grawity's test vectors](https://github.com/grawity/code/tree/master/lib/tests) which were WTFPL v2 licensed when they were retrieved.
+
+Some tests originate from [SaberUK's test vectors](https://github.com/SaberUK/ircparser/tree/master/test) which he's indicated I'm free to include here.

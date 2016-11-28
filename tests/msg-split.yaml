@@ -208,6 +208,53 @@ tests:
         - "foo"
         - "bar baz"
 
+  - input: "@tag1=value1;tag2;vendor1/tag3=value2;vendor2/tag4 :irc.example.com COMMAND param1 param2 :param3 param3"
+    atoms:
+      tags:
+        tag1: "value1"
+        tag2: true
+        vendor1/tag3: "value2"
+        vendor2/tag4: true
+      source: "irc.example.com"
+      verb: "COMMAND"
+      params:
+        - "param1"
+        - "param2"
+        - "param3 param3"
+
+  - input: ":irc.example.com COMMAND param1 param2 :param3 param3"
+    atoms:
+      source: "irc.example.com"
+      verb: "COMMAND"
+      params:
+        - "param1"
+        - "param2"
+        - "param3 param3"
+
+  - input: "@tag1=value1;tag2;vendor1/tag3=value2;vendor2/tag4 COMMAND param1 param2 :param3 param3"
+    atoms:
+      tags:
+        tag1: "value1"
+        tag2: true
+        vendor1/tag3: "value2"
+        vendor2/tag4: true
+      verb: "COMMAND"
+      params:
+        - "param1"
+        - "param2"
+        - "param3 param3"
+
+  - input: "COMMAND"
+    atoms:
+      verb: "COMMAND"
+
+  # yaml encoding + slashes is fun
+  - input: "@foo=\\\\\\\\\\:\\\\s\\s\\r\\n COMMAND"
+    atoms:
+      tags:
+        foo: "\\\\;\\s \r\n"
+      verb: "COMMAND"
+
   # broken messages from unreal
   - input: ":gravel.mozilla.org 432  #momo :Erroneous Nickname: Illegal characters"
     atoms:
