@@ -11,9 +11,9 @@
 # with this software. If not, see
 # <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-# some of the tests in here originate from grawity's test vectors, which is WTFPL v2 licensed
+# some of the tests here originate from grawity's test vectors, which is WTFPL v2 licensed
 #   https://github.com/grawity/code/tree/master/lib/tests
-# some also come from Mozilla's test vectors, which is public domain
+# some of the tests here originate from Mozilla's test vectors, which is public domain
 #   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
 
 tests:
