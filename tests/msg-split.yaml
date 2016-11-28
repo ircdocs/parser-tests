@@ -181,8 +181,6 @@ tests:
     atoms:
       source: "src"
       verb: "AWAY"
-      params:
-        - ""
 
   # tab is not considered <SPACE>
   - input: ":cool\tguy foo bar baz"
@@ -226,7 +224,6 @@ tests:
       params:
         - "#tckk"
         - "+n"
-        - ""
 
   - input: ":services.esper.net MODE #foo-bar +o foobar  "
     atoms:
@@ -236,4 +233,3 @@ tests:
         - "#foo-bar"
         - "+o"
         - "foobar"
-        - ""
