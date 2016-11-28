@@ -7,7 +7,7 @@ Various tests for IRC parsers so people can check to ensure they're consistent. 
 
 ## Testing
 
-There are two included tests used to test these vectors, the Pyython and Golang programs.
+There are two included tests used to test these vectors, the Python and Golang programs.
 
 ### Python
 
