@@ -71,7 +71,6 @@ tests:
         - "baz"
         - ""
     matches:
-      - "foo bar baz "
       - "foo bar baz :"
 
   - atoms:
@@ -121,7 +120,6 @@ tests:
         - "baz"
         - ""
     matches:
-      - ":coolguy foo bar baz "
       - ":coolguy foo bar baz :"
 
   - atoms:
@@ -147,7 +145,6 @@ tests:
       params:
         - ""
     matches:
-      - ":src AWAY "
       - ":src AWAY :"
 
   # tab is not considered <SPACE>
