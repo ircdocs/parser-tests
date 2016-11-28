@@ -12,10 +12,10 @@
 # <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 # Use notes: These tests should be used on the server for your host-validating
-# code, and clients should accept whatever the server throws their way because
-# trying to validate hostnames the server gives you isn't sane. vhosts commonly
-# contain weird chars, and oper masks can omit periods altogether and include
-# things like formatting characters.
+# code. Clients should accept whatever the server throws their way because
+# trying to validate hostnames the server gives you isn't sane -- vhosts
+# commonly contain weird chars, and oper masks can omit periods altogether and
+# include things like formatting characters.
 
 tests:
   # host is the hostname string
