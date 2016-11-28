@@ -18,6 +18,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	"github.com/DanielOaks/girc-go/ircmatch"
 	"github.com/DanielOaks/girc-go/ircmsg"
 	"github.com/docopt/docopt-go"
 )
@@ -45,6 +46,15 @@ type MsgJoinTests struct {
 			Tags   map[string]interface{}
 		}
 		Matches []string
+	}
+}
+
+// MaskMatchTests holds the test cases for IRC mask matching.
+type MaskMatchTests struct {
+	Tests []struct {
+		Mask    string
+		Matches []string
+		Fails   []string
 	}
 }
 
@@ -249,6 +259,54 @@ Options:
 				passed++
 			} else {
 				failed++
+			}
+		}
+
+		fmt.Println(" * Passed tests:", passed)
+		fmt.Println(" * Failed tests:", failed)
+
+		// mask matching tests
+		fmt.Println("Running mask matching tests")
+
+		passed = 0
+		failed = 0
+
+		data, err = ioutil.ReadFile("tests/mask-match.yaml")
+		if err != nil {
+			log.Fatal("Could not open test file mask-match.yaml:", err.Error())
+		}
+
+		var maskMatchTests *MaskMatchTests
+
+		err = yaml.Unmarshal(data, &maskMatchTests)
+		if err != nil {
+			log.Fatal("Could not unmarshal mask-match.yaml test file:", err.Error())
+		}
+
+		passed = 0
+		failed = 0
+
+		for _, test := range maskMatchTests.Tests {
+			mask := ircmatch.MakeMatch(test.Mask)
+
+			var testfailed bool
+			for _, matchString := range test.Matches {
+				if !mask.Match(matchString) {
+					fmt.Println(fmt.Sprintf("Expected mask [%s] to match input [%s] but it did not.", test.Mask, matchString))
+					testfailed = true
+				}
+			}
+			for _, matchString := range test.Fails {
+				if mask.Match(matchString) {
+					fmt.Println(fmt.Sprintf("Did not expect mask [%s] to match input [%s] but it did.", test.Mask, matchString))
+					testfailed = true
+				}
+			}
+
+			if testfailed {
+				failed++
+			} else {
+				passed++
 			}
 		}
 
