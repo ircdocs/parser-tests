@@ -183,7 +183,7 @@ Options:
 					continue
 				}
 
-				if value == true {
+				if value == nil {
 					if tag.HasValue {
 						fmt.Println(
 							"Tag",
@@ -248,7 +248,7 @@ Options:
 			if test.Atoms.Tags != nil {
 				tagsDict := make(map[string]ircmsg.TagValue)
 				for key, value := range test.Atoms.Tags {
-					if value == true {
+					if value == nil {
 						tagsDict[key] = ircmsg.NoTagValue()
 					} else {
 						tagsDict[key] = ircmsg.MakeTagValue(value.(string))
