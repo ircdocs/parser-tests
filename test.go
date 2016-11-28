@@ -71,6 +71,14 @@ type MaskSplitTests struct {
 	}
 }
 
+// ValidateHostnameTests holds the test cases for IRC userhost splitting.
+type ValidateHostnameTests struct {
+	Tests []struct {
+		Host  string
+		Valid bool
+	}
+}
+
 func main() {
 	version := "irc-parser-tests 0.1.0"
 	usage := `irc-parser-tests Go script.
@@ -360,6 +368,41 @@ Options:
 				failed++
 			} else {
 				passed++
+			}
+		}
+
+		fmt.Println(" * Passed tests:", passed)
+		fmt.Println(" * Failed tests:", failed)
+
+		// hostname validation tests
+		fmt.Println("Running hostname validation tests")
+
+		passed = 0
+		failed = 0
+
+		data, err = ioutil.ReadFile("tests/validate-hostname.yaml")
+		if err != nil {
+			log.Fatal("Could not open test file validate-hostname.yaml:", err.Error())
+		}
+
+		var validateHostnameTests *ValidateHostnameTests
+
+		err = yaml.Unmarshal(data, &validateHostnameTests)
+		if err != nil {
+			log.Fatal("Could not unmarshal validate-hostname.yaml test file:", err.Error())
+		}
+
+		for _, test := range validateHostnameTests.Tests {
+			isValid := ircutils.HostnameIsValid(test.Host)
+
+			if isValid == test.Valid {
+				passed++
+			} else if isValid {
+				fmt.Println(fmt.Sprintf("Expected host [%s] to fail validation but it passed.", test.Host))
+				failed++
+			} else {
+				fmt.Println(fmt.Sprintf("Expected host [%s] to pass validation but it failed.", test.Host))
+				failed++
 			}
 		}
 
