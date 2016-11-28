@@ -20,6 +20,7 @@ import (
 
 	"github.com/DanielOaks/girc-go/ircmatch"
 	"github.com/DanielOaks/girc-go/ircmsg"
+	"github.com/DanielOaks/girc-go/ircutils"
 	"github.com/docopt/docopt-go"
 )
 
@@ -58,6 +59,18 @@ type MaskMatchTests struct {
 	}
 }
 
+// MaskSplitTests holds the test cases for IRC userhost splitting.
+type MaskSplitTests struct {
+	Tests []struct {
+		Source string
+		Atoms  struct {
+			Nick string
+			User string
+			Host string
+		}
+	}
+}
+
 func main() {
 	version := "irc-parser-tests 0.1.0"
 	usage := `irc-parser-tests Go script.
@@ -78,6 +91,9 @@ Options:
 		// msg-split tests
 		fmt.Println("Running split tests")
 
+		passed = 0
+		failed = 0
+
 		data, err := ioutil.ReadFile("tests/msg-split.yaml")
 		if err != nil {
 			log.Fatal("Could not open test file msg-split.yaml:", err.Error())
@@ -89,9 +105,6 @@ Options:
 		if err != nil {
 			log.Fatal("Could not unmarshal msg-split.yaml test file:", err.Error())
 		}
-
-		passed = 0
-		failed = 0
 
 		for _, test := range msgSplitTests.Tests {
 			msg, err := ircmsg.ParseLine(test.Input)
@@ -222,9 +235,6 @@ Options:
 			log.Fatal("Could not unmarshal msg-join.yaml test file:", err.Error())
 		}
 
-		passed = 0
-		failed = 0
-
 		for _, test := range msgJoinTests.Tests {
 			var tags *map[string]ircmsg.TagValue
 			if test.Atoms.Tags != nil {
@@ -283,9 +293,6 @@ Options:
 			log.Fatal("Could not unmarshal mask-match.yaml test file:", err.Error())
 		}
 
-		passed = 0
-		failed = 0
-
 		for _, test := range maskMatchTests.Tests {
 			mask := ircmatch.MakeMatch(test.Mask)
 
@@ -301,6 +308,52 @@ Options:
 					fmt.Println(fmt.Sprintf("Did not expect mask [%s] to match input [%s] but it did.", test.Mask, matchString))
 					testfailed = true
 				}
+			}
+
+			if testfailed {
+				failed++
+			} else {
+				passed++
+			}
+		}
+
+		fmt.Println(" * Passed tests:", passed)
+		fmt.Println(" * Failed tests:", failed)
+
+		// mask splitting tests
+		fmt.Println("Running userhost splitting tests")
+
+		passed = 0
+		failed = 0
+
+		data, err = ioutil.ReadFile("tests/userhost-split.yaml")
+		if err != nil {
+			log.Fatal("Could not open test file userhost-split.yaml:", err.Error())
+		}
+
+		var maskSplitTests *MaskSplitTests
+
+		err = yaml.Unmarshal(data, &maskSplitTests)
+		if err != nil {
+			log.Fatal("Could not unmarshal userhost-split.yaml test file:", err.Error())
+		}
+
+		for _, test := range maskSplitTests.Tests {
+			uh := ircutils.ParseUserhost(test.Source)
+
+			var testfailed bool
+
+			if uh.Nick != test.Atoms.Nick {
+				fmt.Println(fmt.Sprintf("Expected nick from userhost [%s] to match test [%s] but it was [%s].", test.Source, test.Atoms.Nick, uh.Nick))
+				testfailed = true
+			}
+			if uh.User != test.Atoms.User {
+				fmt.Println(fmt.Sprintf("Expected user from userhost [%s] to match test [%s] but it was [%s].", test.Source, test.Atoms.User, uh.User))
+				testfailed = true
+			}
+			if uh.Host != test.Atoms.Host {
+				fmt.Println(fmt.Sprintf("Expected host from userhost [%s] to match test [%s] but it was [%s].", test.Source, test.Atoms.Host, uh.Host))
+				testfailed = true
 			}
 
 			if testfailed {

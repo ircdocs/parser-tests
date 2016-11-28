@@ -121,7 +121,7 @@ print()
 
 # NICKMASK Tests
 print('Running nickmask tests')
-data = yaml.safe_load(open('tests/mask-split.yaml').read())
+data = yaml.safe_load(open('tests/userhost-split.yaml').read())
 
 failed_tests = 0
 passed_tests = 0
