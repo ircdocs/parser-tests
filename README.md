@@ -12,11 +12,11 @@ There are two included tests used to test these vectors, the Python and Golang p
 
 ### Python
 
-The `test.py` script uses the [girc](https://github.com/DanielOaks/girc) and [ircmatch](https://github.com/mammon-ircd/ircmatch>) libraries as reference implementations.
+The `test.py` script uses the [girc](https://github.com/DanielOaks/girc) and [ircmatch](https://github.com/mammon-ircd/ircmatch>) libraries as reference implementations, as well as [pyyaml](http://pyyaml.org/) to parse the test files.
 
 To install these libraries, run:
 
-    pip3 install --upgrade girc ircmatch
+    pip3 install --upgrade girc ircmatch pyyaml
 
 After that, simply run the script with `python3 test.py` in the root dir. This will test everything we can test, and show the output.
 
