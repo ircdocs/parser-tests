@@ -35,6 +35,19 @@ type MsgSplitTests struct {
 	}
 }
 
+// MsgJoinTests holds the test cases for IRC message assembly
+type MsgJoinTests struct {
+	Tests []struct {
+		Atoms struct {
+			Source string
+			Verb   string
+			Params []string
+			Tags   map[string]interface{}
+		}
+		Matches []string
+	}
+}
+
 func main() {
 	version := "irc-parser-tests 0.1.0"
 	usage := `irc-parser-tests Go script.
@@ -75,7 +88,7 @@ Options:
 
 			if err != nil {
 				log.Fatal(
-					"msg-parse: Test failed to parse: ",
+					"msg-split: Test failed to parse: ",
 					test.Input,
 				)
 			}
@@ -176,6 +189,67 @@ Options:
 			}
 
 			passed++
+		}
+
+		fmt.Println(" * Passed tests:", passed)
+		fmt.Println(" * Failed tests:", failed)
+
+		// msg-join tests
+		fmt.Println("Running join tests")
+
+		passed = 0
+		failed = 0
+
+		data, err = ioutil.ReadFile("tests/msg-join.yaml")
+		if err != nil {
+			log.Fatal("Could not open test file msg-join.yaml:", err.Error())
+		}
+
+		var msgJoinTests *MsgJoinTests
+
+		err = yaml.Unmarshal(data, &msgJoinTests)
+		if err != nil {
+			log.Fatal("Could not unmarshal msg-join.yaml test file:", err.Error())
+		}
+
+		passed = 0
+		failed = 0
+
+		for _, test := range msgJoinTests.Tests {
+			var tags *map[string]ircmsg.TagValue
+			if test.Atoms.Tags != nil {
+				tagsDict := make(map[string]ircmsg.TagValue)
+				for key, value := range test.Atoms.Tags {
+					if value == true {
+						tagsDict[key] = ircmsg.NoTagValue()
+					} else {
+						tagsDict[key] = ircmsg.MakeTagValue(value.(string))
+					}
+				}
+				tags = &tagsDict
+			}
+
+			msg := ircmsg.MakeMessage(tags, test.Atoms.Source, test.Atoms.Verb, test.Atoms.Params...)
+			line, err := msg.Line()
+
+			if err != nil {
+				log.Fatal(
+					"msg-join: Test failed to parse: ",
+					err.Error(),
+				)
+			}
+
+			var hasPassed bool
+			for _, test := range test.Matches {
+				if strings.TrimRight(line, "\r\n") == test {
+					hasPassed = true
+				}
+			}
+			if hasPassed {
+				passed++
+			} else {
+				failed++
+			}
 		}
 
 		fmt.Println(" * Passed tests:", passed)
