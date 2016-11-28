@@ -15,6 +15,8 @@
 #   https://github.com/grawity/code/tree/master/lib/tests
 # some of the tests here originate from Mozilla's test vectors, which is public domain
 #   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
+# some of the tests here originate from SaberUK's test vectors, which he's indicated I am free to include here
+#   https://github.com/SaberUK/ircparser/tree/master/test
 
 tests:
   # the atoms dict has the keys:
@@ -131,6 +133,37 @@ tests:
         - "  "
     matches:
       - ":coolguy foo bar baz :  "
+
+  # with tags
+  - atoms:
+      verb: "foo"
+      tags:
+        "a": "b\\and\nk"
+        "d": "gh;764"
+    matches:
+      - "@a=b\\\\and\\nk;d=gh\\:764 foo"
+      - "@d=gh\\:764;a=b\\\\and\\nk foo"
+
+  - atoms:
+      verb: "foo"
+      tags:
+        "a": "b\\and\nk"
+        "d": "gh;764"
+      params:
+        - "par1"
+        - "par2"
+    matches:
+      - "@a=b\\\\and\\nk;d=gh\\:764 foo par1 par2"
+      - "@a=b\\\\and\\nk;d=gh\\:764 foo par1 :par2"
+      - "@d=gh\\:764;a=b\\\\and\\nk foo par1 par2"
+      - "@d=gh\\:764;a=b\\\\and\\nk foo par1 :par2"
+
+  - atoms:
+      tags:
+        foo: "\\\\;\\s \r\n"
+      verb: "COMMAND"
+    matches:
+      - "@foo=\\\\\\\\\\:\\\\s\\s\\r\\n COMMAND"
 
   # with and without last param
   - atoms:
