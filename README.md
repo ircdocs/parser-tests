@@ -9,13 +9,27 @@ Various tests for IRC parsers so people can check to ensure they're consistent. 
 
 There are two included tests used to test these vectors, the Python and Golang programs.
 
+
 ### Python
 
 The `test.py` script uses the [girc](https://github.com/DanielOaks/girc) and [ircmatch](https://github.com/mammon-ircd/ircmatch>) libraries as reference implementations.
 
-To install these libraries, run `pip3 install --upgrade girc ircmatch`.
+To install these libraries, run:
 
-After that, simply run `python3 test.py`. This will test everything we can test, and show the output.
+    pip3 install --upgrade girc ircmatch
+
+After that, simply run the script with `python3 test.py` in the root dir. This will test everything we can test, and show the output.
+
+
+### Go
+
+The `test.go` script uses the [girc-go](https://github.com/DanielOaks/girc-go) packages as reference implementations.
+
+To install these packages, run:
+
+    go get -u ./...
+
+After that, simply run the script with `go run test.go run` in the root dir. This will test everything we can test, and show the output.
 
 
 ## Sources
