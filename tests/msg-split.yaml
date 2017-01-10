@@ -282,3 +282,18 @@ tests:
         - "#foo-bar"
         - "+o"
         - "foobar"
+
+  # If a tag value has a slash followed by a character which doesn't need
+  # to be escaped, the slash should be dropped.
+  - input: "@tag1=value\\1 COMMAND"
+    atoms:
+      tags:
+        tag1: "value1"
+      verb: "COMMAND"
+
+  # A slash at the end of a tag value should be dropped
+  - input: "@tag1=value1\\ COMMAND"
+    atoms:
+      tags:
+        tag1: "value1"
+      verb: "COMMAND"
