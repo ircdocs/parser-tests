@@ -283,6 +283,13 @@ tests:
         - "+o"
         - "foobar"
 
+  # tag values should be parsed char-at-a-time to prevent wayward replacements.
+  - input: "@tag1=value\\\\ntest COMMAND"
+    atoms:
+      tags:
+        tag1: "value\\ntest"
+      verb: "COMMAND"
+
   # If a tag value has a slash followed by a character which doesn't need
   # to be escaped, the slash should be dropped.
   - input: "@tag1=value\\1 COMMAND"
