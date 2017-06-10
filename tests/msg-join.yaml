@@ -19,6 +19,8 @@
 #   https://github.com/SaberUK/ircparser/tree/master/test
 
 tests:
+  # the desc string holds a description of the test, if it exists
+
   # the atoms dict has the keys:
   #   * tags: tags dict
   #       tags with no equals sign have a value of null in this file
@@ -33,8 +35,9 @@ tests:
 
   # matches is a list of messages that match
 
-  # simple
-  - atoms:
+  # simple tests
+  - desc: Simple test with verb and params.
+    atoms:
       verb: "foo"
       params:
         - "bar"
@@ -44,8 +47,26 @@ tests:
       - "foo bar baz asdf"
       - "foo bar baz :asdf"
 
+  # with no regular params
+  - desc: Simple test with source and no params.
+    atoms:
+      source: "src"
+      verb: "AWAY"
+    matches:
+      - ":src AWAY"
+
+  - desc: Simple test with source and empty trailing param.
+    atoms:
+      source: "src"
+      verb: "AWAY"
+      params:
+        - ""
+    matches:
+      - ":src AWAY :"
+
   # with source
-  - atoms:
+  - desc: Simple test with source.
+    atoms:
       source: "coolguy"
       verb: "foo"
       params:
@@ -57,7 +78,8 @@ tests:
       - ":coolguy foo bar baz :asdf"
 
   # with trailing param
-  - atoms:
+  - desc: Simple test with trailing param.
+    atoms:
       verb: "foo"
       params:
         - "bar"
@@ -66,7 +88,8 @@ tests:
     matches:
       - "foo bar baz :asdf quux"
 
-  - atoms:
+  - desc: Simple test with empty trailing param.
+    atoms:
       verb: "foo"
       params:
         - "bar"
@@ -75,7 +98,8 @@ tests:
     matches:
       - "foo bar baz :"
 
-  - atoms:
+  - desc: Simple test with trailing param containing colon.
+    atoms:
       verb: "foo"
       params:
         - "bar"
@@ -85,7 +109,8 @@ tests:
       - "foo bar baz ::asdf"
 
   # with source and trailing param
-  - atoms:
+  - desc: Test with source and trailing param.
+    atoms:
       source: "coolguy"
       verb: "foo"
       params:
@@ -95,7 +120,8 @@ tests:
     matches:
       - ":coolguy foo bar baz :asdf quux"
 
-  - atoms:
+  - desc: Test with trailing containing beginning+end whitespace.
+    atoms:
       source: "coolguy"
       verb: "foo"
       params:
@@ -105,7 +131,8 @@ tests:
     matches:
       - ":coolguy foo bar baz :  asdf quux "
 
-  - atoms:
+  - desc: Test with trailing containing what looks like another trailing param.
+    atoms:
       source: "coolguy"
       verb: "PRIVMSG"
       params:
@@ -114,7 +141,8 @@ tests:
     matches:
       - ":coolguy PRIVMSG bar :lol :) "
 
-  - atoms:
+  - desc: Simple test with source and empty trailing.
+    atoms:
       source: "coolguy"
       verb: "foo"
       params:
@@ -124,7 +152,8 @@ tests:
     matches:
       - ":coolguy foo bar baz :"
 
-  - atoms:
+  - desc: Trailing contains only spaces.
+    atoms:
       source: "coolguy"
       verb: "foo"
       params:
@@ -134,8 +163,20 @@ tests:
     matches:
       - ":coolguy foo bar baz :  "
 
+  - desc: Param containing tab (tab is not considered SPACE for message splitting).
+    atoms:
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "b\tar"
+        - "baz"
+    matches:
+      - ":coolguy foo b\tar baz"
+      - ":coolguy foo b\tar :baz"
+
   # with tags
-  - atoms:
+  - desc: Tag with no value and space-filled trailing.
+    atoms:
       tags:
         "asd": null
       source: "coolguy"
@@ -147,7 +188,8 @@ tests:
     matches:
       - "@asd :coolguy foo bar baz :  "
 
-  - atoms:
+  - desc: Tags with escaped values.
+    atoms:
       verb: "foo"
       tags:
         "a": "b\\and\nk"
@@ -156,7 +198,8 @@ tests:
       - "@a=b\\\\and\\nk;d=gh\\:764 foo"
       - "@d=gh\\:764;a=b\\\\and\\nk foo"
 
-  - atoms:
+  - desc: Tags with escaped values and params.
+    atoms:
       verb: "foo"
       tags:
         "a": "b\\and\nk"
@@ -170,35 +213,10 @@ tests:
       - "@d=gh\\:764;a=b\\\\and\\nk foo par1 par2"
       - "@d=gh\\:764;a=b\\\\and\\nk foo par1 :par2"
 
-  - atoms:
+  - desc: Tag with long, strange values (including LF and newline).
+    atoms:
       tags:
         foo: "\\\\;\\s \r\n"
       verb: "COMMAND"
     matches:
       - "@foo=\\\\\\\\\\:\\\\s\\s\\r\\n COMMAND"
-
-  # with and without last param
-  - atoms:
-      source: "src"
-      verb: "AWAY"
-    matches:
-      - ":src AWAY"
-
-  - atoms:
-      source: "src"
-      verb: "AWAY"
-      params:
-        - ""
-    matches:
-      - ":src AWAY :"
-
-  # tab is not considered <SPACE>
-  - atoms:
-      source: "coolguy"
-      verb: "foo"
-      params:
-        - "b\tar"
-        - "baz"
-    matches:
-      - ":coolguy foo b\tar baz"
-      - ":coolguy foo b\tar :baz"
