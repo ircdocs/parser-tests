@@ -45,3 +45,12 @@ tests:
       - "cooldud3!~bc@127.0.0.1"
       - "koolguy!ab@127.0.0.5"
       - "cooodud3!~d@124.0.0.1"
+
+  # Cause failures in fnmatch/glob based matchers
+  - mask: "cool[guy]!*@*"
+    matches:
+      - "cool[guy]!guy@127.0.0.1"
+      - "cool[guy]!a@example.com"
+    fails:
+      - "coolg!ab@127.0.0.1"
+      - "cool[!ac@127.0.1.1"
