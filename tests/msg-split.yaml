@@ -304,3 +304,41 @@ tests:
       tags:
         tag1: "value1"
       verb: "COMMAND"
+
+  # Duplicate tags: Parsers SHOULD disregard all but the final occurence 
+  - input: "@tag1=1;tag2=3;tag3=4;tag1=5 COMMAND"
+    atoms:
+      tags:
+        tag1: "5"
+        tag2: "3"
+        tag3: "4"
+      verb: "COMMAND"
+
+  # vendored tags can have the same name as a non-vendored tag
+  - input: "@tag1=1;tag2=3;tag3=4;tag1=5;vendor/tag2=8 COMMAND"
+    atoms:
+      tags:
+        tag1: "5"
+        tag2: "3"
+        tag3: "4"
+        vendor/tag2: "8"
+      verb: "COMMAND"
+
+  # Some parsers handle /MODE in a special way, make sure they do it right
+  - input: ":SomeOp MODE #channel :+i"
+    atoms:
+      source: "SomeOp"
+      verb: "MODE"
+      params:
+      - "#channel"
+      - "+i"
+
+  - input: ":SomeOp MODE #channel +oo SomeUser :AnotherUser"
+    atoms:
+      source: "SomeOp"
+      verb: "MODE"
+      params:
+      - "#channel"
+      - "+oo"
+      - "SomeUser"
+      - "AnotherUser"
