@@ -28,8 +28,7 @@ tests:
 
   # the atoms dict has the keys:
   #   * tags: tags dict
-  #       tags with no equals sign have a value of null in this file
-  #       tags with no value after = sign have a value of empty string
+  #       tags with no value are an empty string
   #   * source: source string, without single leading colon
   #   * verb: verb string
   #   * params: params split up as a list
@@ -134,7 +133,7 @@ tests:
       tags:
         "a": "b"
         "c": "32"
-        "k": null
+        "k": ""
         "rt": "ql7"
 
   # with escaped tags
@@ -150,7 +149,7 @@ tests:
   - input: "@c;h=;a=b :quux ab cd"
     atoms:
       tags:
-        "c": null
+        "c": ""
         "h": ""
         "a": "b"
       source: "quux"
@@ -210,13 +209,13 @@ tests:
         - "foo"
         - "bar baz"
 
-  - input: "@tag1=value1;tag2;vendor1/tag3=value2;vendor2/tag4 :irc.example.com COMMAND param1 param2 :param3 param3"
+  - input: "@tag1=value1;tag2;vendor1/tag3=value2;vendor2/tag4= :irc.example.com COMMAND param1 param2 :param3 param3"
     atoms:
       tags:
         tag1: "value1"
-        tag2: null
+        tag2: ""
         vendor1/tag3: "value2"
-        vendor2/tag4: null
+        vendor2/tag4: ""
       source: "irc.example.com"
       verb: "COMMAND"
       params:
@@ -237,9 +236,9 @@ tests:
     atoms:
       tags:
         tag1: "value1"
-        tag2: null
+        tag2: ""
         vendor1/tag3: "value2"
-        vendor2/tag4: null
+        vendor2/tag4: ""
       verb: "COMMAND"
       params:
         - "param1"
