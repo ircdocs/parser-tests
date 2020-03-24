@@ -46,6 +46,20 @@ tests:
       - "koolguy!ab@127.0.0.5"
       - "cooodud3!~d@124.0.0.1"
 
+  - mask: "cool!?username@*"
+    matches:
+      - "cool!ausername@127.0.0.1"
+      - "cool!~username@127.0.0.1"
+    fails:
+      - "cool!username@127.0.0.1"
+
+  - mask: "cool!a?*@*"
+    matches:
+      - "cool!ab@127.0.0.1"
+      - "cool!abc@127.0.0.1"
+    fails:
+      - "cool!a@127.0.0.1"
+
   # Cause failures in fnmatch/glob based matchers
   - mask: "cool[guy]!*@*"
     matches:
