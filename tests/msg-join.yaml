@@ -15,8 +15,8 @@
 #   https://github.com/grawity/code/tree/master/lib/tests
 # some of the tests here originate from Mozilla's test vectors, which is public domain
 #   https://dxr.mozilla.org/comm-central/source/chat/protocols/irc/test/test_ircMessage.js
-# some of the tests here originate from SaberUK's test vectors, which he's indicated I am free to include here
-#   https://github.com/SaberUK/ircparser/tree/master/test
+# some of the tests here originate from Sadie's test vectors, which she's indicated I am free to include here
+#   https://github.com/SadieCat/ircparser-ruby/tree/master/test
 
 tests:
   # the desc string holds a description of the test, if it exists

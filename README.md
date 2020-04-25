@@ -40,4 +40,4 @@ Some tests originate from [Mozilla's test vectors](https://dxr.mozilla.org/comm-
 
 Some tests originate from [grawity's test vectors](https://github.com/grawity/irc-parse-tests) which were WTFPL v2 licensed when they were retrieved.
 
-Some tests originate from [SaberUK's test vectors](https://github.com/SaberUK/ircparser/tree/master/test) which they've indicated I'm free to include here.
+Some tests originate from [Sadie's test vectors](https://github.com/SadieCat/ircparser-ruby/tree/master/test) which she's indicated I'm free to include here.
