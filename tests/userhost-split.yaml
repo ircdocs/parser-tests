@@ -34,25 +34,10 @@ tests:
       host: "localhost"
 
   # without atoms
-  - source: "!ag@127.0.0.1"
-    atoms:
-      user: "ag"
-      host: "127.0.0.1"
-
-  - source: "coolguy!@127.0.0.1"
-    atoms:
-      nick: "coolguy"
-      host: "127.0.0.1"
-
   - source: "coolguy@127.0.0.1"
     atoms:
       nick: "coolguy"
       host: "127.0.0.1"
-
-  - source: "coolguy!ag@"
-    atoms:
-      nick: "coolguy"
-      user: "ag"
 
   - source: "coolguy!ag"
     atoms:
