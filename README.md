@@ -9,6 +9,14 @@ Various tests for IRC parsers so people can check to ensure they're consistent. 
 
 There are two included tests used to test these vectors, the Python and Golang programs.
 
+### Using the python library
+Either `pip install irc_parser_tests` or add `irc_parser_tests` to your `requirements.txt`. The test data is available in the module `parser_tests`.
+
+### Releasing a new python version
+1. Bump the version identifier in `parser_tests/__init__.py`
+2. Commit the version bump and tag it `git tag v<version>`
+3. Push to master
+4. Github actions will deploy to PyPi
 
 ### Python
 
