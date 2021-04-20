@@ -20,6 +20,11 @@ tests:
   #   * host: host string
   # if a key does not exist, assume it is an empty string
 
+  # simpler
+  - source: "coolguy"
+    atoms:
+      nick: "coolguy"
+
   # simple
   - source: "coolguy!ag@127.0.0.1"
     atoms:
