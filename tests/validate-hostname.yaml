@@ -46,6 +46,10 @@ tests:
   - host: "xn--bcher-kva.ch"
     valid: true
 
+  # host ending with a .
+  - host: "services."
+    valid: true
+
   # # this should only validate after being transformed into punycode as above
   # - host: "irc.Bücher.ch"
   #   valid: false
@@ -69,4 +73,16 @@ tests:
 
   # empty hostname
   - host: ""
+    valid: false
+
+  # spaces in host
+  - host: " "
+    valid: false
+  - host: "example. net"
+    valid: false
+  - host: "ex ample.org"
+    valid: false
+  - host: " example.org"
+    valid: false
+  - host: "example.org "
     valid: false
