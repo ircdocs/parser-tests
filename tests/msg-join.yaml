@@ -192,7 +192,7 @@ tests:
   - desc: Tag with no value and space-filled trailing.
     atoms:
       tags:
-        "asd": null
+        "asd": ""
       source: "coolguy"
       verb: "foo"
       params:
