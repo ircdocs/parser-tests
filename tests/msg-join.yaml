@@ -174,6 +174,21 @@ tests:
       - ":coolguy foo b\tar :baz"
 
   # with tags
+  - desc: Tag with empty value and space-filled trailing.
+    atoms:
+      tags:
+        "asd": ""
+      source: "coolguy"
+      verb: "foo"
+      params:
+        - "bar"
+        - "baz"
+        - "  "
+    matches:
+      # Implementations MAY normalise tag values by converting the empty form to the missing form
+      - "@asd :coolguy foo bar baz :  "
+      - "@asd= :coolguy foo bar baz :  "
+
   - desc: Tag with no value and space-filled trailing.
     atoms:
       tags:
@@ -185,6 +200,7 @@ tests:
         - "baz"
         - "  "
     matches:
+      # MUST NOT convert values from missing to empty, to prevent size limit issues
       - "@asd :coolguy foo bar baz :  "
 
   - desc: Tags with escaped values.
